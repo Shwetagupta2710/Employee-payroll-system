@@ -1,3 +1,5 @@
+import java.util.*;
+
 abstract class Employee {
     private String name;
     private int id;
@@ -54,8 +56,49 @@ class PartTimeEmployee extends Employee {
     }
 }
 
+class PayrollSystem {
+
+    private ArrayList<Employee> employeeList;
+
+    public PayrollSystem() {
+        employeeList = new ArrayList<>();
+    }
+
+    public void addEmployee(Employee employee) {
+        employeeList.add(employee);
+    }
+
+    public void removeEmployee(int id) {
+        Employee employeeToRemove = null;
+        for (Employee employee : employeeList) {
+            if (employee.getId() == id) {
+                employeeToRemove = employee;
+                break;
+            }
+        }
+        if (employeeToRemove != null) {
+            employeeList.remove(employeeToRemove);
+
+        }
+    }
+
+    public void displayEmployee() {
+        for (Employee employee : employeeList) {
+            System.out.println(employee);
+        }
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        PayrollSystem payrollSystem = new PayrollSystem();
+        FullTimeEmployee emp1 = new FullTimeEmployee("vikas", 1, 50000);
+        PartTimeEmployee emp2 = new PartTimeEmployee("alex", 2, 10, 105);
+        payrollSystem.addEmployee(emp1);
+        payrollSystem.addEmployee(emp2);
+        payrollSystem.displayEmployee();
+     
+
+
     }
 }
